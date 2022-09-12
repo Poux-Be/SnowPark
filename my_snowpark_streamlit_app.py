@@ -11,7 +11,6 @@
 # -------------------- 
 
 # ---- LIBRARIES -----
-import snowflake.snowpark
 import pandas as pd
 import streamlit as st
 
