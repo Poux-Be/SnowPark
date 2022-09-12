@@ -1,0 +1,8 @@
+# requirements.txt
+snowflake-connector-python
+snowflake.snowpark
+streamlit
+plotly-express
+matplotlib
+folium
+streamlit-folium
