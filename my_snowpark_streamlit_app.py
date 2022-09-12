@@ -19,19 +19,19 @@ import pandas as pd
 # ----- INITIALIZATION -----
 # Create Session object
 def create_session_object():
-    connection_parameters = {
-        "account": "QK39032",
-        "user": "LPOUXGM5",
-        "password": "Azerty190924!",
-        "role": "ACCOUNTADMIN",
-        "warehouse": "COMPUTE_WH_XS",
-        "database": "KNOEMA_ENVIRONMENT_DATA_ATLAS",
-        "schema": "ENVIRONMENT"
-    }
-    session = Session.builder.configs(connection_parameters).create()
-    print(session.sql('select current_warehouse(), current_database(), current_schema()').collect())
+     connection_parameters = {
+      "account": "QK39032",
+      "user": "LPOUXGM5",
+      "password": "Azerty190924!",
+      "role": "ACCOUNTADMIN",
+      "warehouse": "COMPUTE_WH_XS",
+      "database": "KNOEMA_ENVIRONMENT_DATA_ATLAS",
+      "schema": "ENVIRONMENT"
+     }
+     session = Session.builder.configs(connection_parameters).create()
+     print(session.sql('select current_warehouse(), current_database(), current_schema()').collect())
     
-    return session
+     return session
 
 # ----- QUERY DATA -----
 # CO2 Emissions by Country
@@ -60,22 +60,22 @@ st.subheader("Powered by Snowpark for Python and Snowflake Data Marketplace | Ma
 # Use columns to display the three dataframes side-by-side along with their headers
 col1, col2, col3 = st.columns(3)
 with st.container():
-   with col1:
-   st.subheader('CO2 Emissions by Country')
-   st.dataframe(pd_df_co2)
-with col2:
-   st.subheader('Forest Occupied Land Area by Country')
-   st.dataframe(pd_df_land)
-with col3:
-   st.subheader('Total Municipal Waste by Country')
-   st.dataframe(pd_df_waste)
+    with col1:
+        st.subheader('CO2 Emissions by Country')
+        st.dataframe(pd_df_co2)
+    with col2:
+        st.subheader('Forest Occupied Land Area by Country')
+        st.dataframe(pd_df_land)
+    with col3:
+        st.subheader('Total Municipal Waste by Country')
+        st.dataframe(pd_df_waste)
 
-# Display an interactive bar chart to visualize CO2 Emissions by Top N Countries
-with st.container():
-   st.subheader('CO2 Emissions by Top N Countries')
-   with st.expander(""):
-      emissions_threshold = st.number_input(label='Emissions Threshold',min_value=5000, value=20000, step=5000)
-      pd_df_co2_top_n = snow_df_co2.filter(col('Total CO2 Emissions') > emissions_threshold).toPandas()
-      st.bar_chart(data=pd_df_co2_top_n.set_index('Location Name'), width=850, height=500, use_container_width=True)
+    # Display an interactive bar chart to visualize CO2 Emissions by Top N Countries
+    with st.container():
+        st.subheader('CO2 Emissions by Top N Countries')
+        with st.expander(""):
+            emissions_threshold = st.number_input(label='Emissions Threshold',min_value=5000, value=20000, step=5000)
+            pd_df_co2_top_n = snow_df_co2.filter(col('Total CO2 Emissions') > emissions_threshold).toPandas()
+            st.bar_chart(data=pd_df_co2_top_n.set_index('Location Name'), width=850, height=500, use_container_width=True)
 
 
