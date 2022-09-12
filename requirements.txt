@@ -1,6 +1,6 @@
 # requirements.txt
 snowflake-connector-python
-snowflake.snowpark
+snowflake-snowpark-python
 streamlit
 plotly-express
 matplotlib
